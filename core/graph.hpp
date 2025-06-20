@@ -13,6 +13,7 @@ public:
     void loadFromEdgeList(const string& path);
     const vector<int>& neighbors(int u) const;
     vector<int> bfs(int start) const;
+    size_t size() const;
 
 private:
     unordered_map<int, vector<int>> adj;

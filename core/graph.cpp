@@ -43,3 +43,7 @@ vector<int> Graph::bfs(int start) const {
     }
     return order;
 }
+
+size_t Graph::size() const {
+  return adj.size();
+}
