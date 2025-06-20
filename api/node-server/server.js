@@ -5,7 +5,10 @@ const { spawn } = require('child_process');
 const path    = require('path');
 
 const app = express();
+const cors = require('cors');
+app.use(cors()); 
 const PORT = process.env.PORT || 8080;
+// const express = require('express');
 
 // Path to your C++ CLI binary; adjust if you put it elsewhere
 const CLI_PATH = path.resolve(__dirname, '..', '..', 'graph_cli');
@@ -66,6 +69,9 @@ app.get('/dijkstra', (req, res) => {
   runCli('dijkstra', [start, end], res);
 });
 
+app.get('/graph', (req, res) => {
+  runCli('dump', [], res);
+});
 // 404 for anything else
 app.use((_, res) => {
   res.status(404).json({ error: 'Not found' });

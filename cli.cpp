@@ -9,12 +9,18 @@
 using json = nlohmann::json;
 
 int main(int argc, char* argv[]) {
-    if (argc < 4) {
-        cerr << "Usage: graph_cli <mode> <edge_file> <args...>\n";
+    std::string mode = (argc > 1 ? argv[1] : "");
+    // dump only needs 2 args: mode + edge_file
+    if ((mode == "dump" && argc < 3) ||
+        (mode != "dump" && argc < 4)) {
+        std::cerr << "Usage:\n"
+                  << "  graph_cli dump <edge_file>\n"
+                  << "  graph_cli <mode> <edge_file> <args...>\n";
         return 1;
     }
+    // std::string edge_file = argv[2];
 
-    std::string mode = argv[1];
+    // std::string mode = argv[1];
     std::string edge_file = argv[2];
     Graph g;
     try {
@@ -50,6 +56,27 @@ int main(int argc, char* argv[]) {
         int v = std::atoi(argv[4]);
         int d = g.dijkstra(u, v);            // implement this in Graph!
         json j = {{"distance", d}};
+        std::cout << j.dump();
+    }
+    else if (mode == "dump") {
+        std::vector<int> nodes;
+        for (auto &kv : g.adjacency()) 
+        nodes.push_back(kv.first);
+
+        // Build link list
+        std::vector<std::array<int,2>> links;
+        for (auto &kv : g.adjacency()) {
+        int u = kv.first;
+        for (int v : kv.second)
+            links.push_back({u, v});
+        }
+
+        json j;
+        j["nodes"] = nodes;
+        j["links"] = json::array();
+        for (auto &e : links) {
+        j["links"].push_back({{"source", e[0]}, {"target", e[1]}});
+        }
         std::cout << j.dump();
     }
     else {

@@ -16,6 +16,9 @@ public:
     size_t size() const;
     int dijkstra(int u, int v) const;
     int shortestDistance(int u, int v) const;
+    const unordered_map<int, vector<int>>& adjacency() const {
+        return adj;
+    }
 
 private:
     unordered_map<int, vector<int>> adj;
