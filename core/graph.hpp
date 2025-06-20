@@ -14,6 +14,8 @@ public:
     const vector<int>& neighbors(int u) const;
     vector<int> bfs(int start) const;
     size_t size() const;
+    int dijkstra(int u, int v) const;
+    int shortestDistance(int u, int v) const;
 
 private:
     unordered_map<int, vector<int>> adj;
