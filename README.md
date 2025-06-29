@@ -169,5 +169,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 > **GraphNexus: Unleash the power of massive graphs!**
 
-**Tip:**  
-Replace image paths with your actual screenshots and update links/usernames as needed!
+
